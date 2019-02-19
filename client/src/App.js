@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Router, Route, Switch } from 'react-router'
 import createBrowserHistory from "history/createBrowserHistory";
-import Home from "./components/Home";
+import HomePage from "./components/pages/HomePage";
+import LoginPage from "./components/pages/LoginPage";
 import Post from "./components/Post";
-import Fetch from "./components/Fetch";
 
 class App extends Component {
   render() {
@@ -12,8 +11,8 @@ class App extends Component {
       <div className="App">
         <Router history={createBrowserHistory()}>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/fetch" component={Fetch}/>
+            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/login" component={LoginPage}/>
             <Route exact path="/post" component={Post}/>
           </Switch>
         </Router>
