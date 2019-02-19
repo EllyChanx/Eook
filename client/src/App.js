@@ -8,7 +8,7 @@ import Post from "./components/Post";
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="ui container">
         <Router history={createBrowserHistory()}>
           <Switch>
             <Route exact path="/" component={HomePage}/>
