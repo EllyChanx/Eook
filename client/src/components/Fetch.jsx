@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 
-class Home extends Component {
+class Fetch extends Component {
 
   render() {
     return (
       <div>
-        <p> Home </p>
+        <p> Fetch </p>
       </div>
     );
   }
 }
 
-export default Home;
+export default Fetch;

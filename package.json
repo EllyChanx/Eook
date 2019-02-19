@@ -8,11 +8,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "dataloader": "^1.4.0",
     "express": "^4.16.4",
-    "express-graphql": "^0.7.1",
-    "graphql": "^14.1.1",
-    "xml2js": "^0.4.19"
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
