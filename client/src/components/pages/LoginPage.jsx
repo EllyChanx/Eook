@@ -5,7 +5,6 @@ class LoginPage extends React.Component {
 
   submit = data => {
     console.log(data);
-    
   }
 
   render() {

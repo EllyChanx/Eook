@@ -26,6 +26,7 @@ class LoginForm extends React.Component {
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
       this.props.submit(this.state.data);
+      // get from mother component
     }
   }
 
@@ -74,5 +75,6 @@ class LoginForm extends React.Component {
 LoginForm.propTypes = {
   submit: PropTypes.func.isRequired
 }
+// when mother component render this, such prop type need to be passed
 
 export default LoginForm;
