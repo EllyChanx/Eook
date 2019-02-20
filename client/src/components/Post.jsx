@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Home extends Component {
+class Post extends Component {
   state = {
     response: '',
     post: '',
@@ -52,4 +52,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Post;
