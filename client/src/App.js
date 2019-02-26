@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router'
 import createBrowserHistory from "history/createBrowserHistory";
+
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
+
+import Test from "./components/pages/Test";
 import Post from "./components/Post";
 
 class App extends Component {
@@ -13,6 +16,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage}/>
             <Route exact path="/login" component={LoginPage}/>
+            <Route exact path="/test" component={Test}/>
             <Route exact path="/post" component={Post}/>
           </Switch>
         </Router>
