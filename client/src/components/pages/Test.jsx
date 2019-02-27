@@ -8,13 +8,15 @@ class Test extends Component {
   }
 
   componentDidMount() {
-    return window.fetch(`https://chitter-backend-api.herokuapp.com/peeps`)
+    const url = "/book/review_counts.json?isbns=0441172717%2C0141439602&key=WsrFDuZa7PUVsZH4UgdmUQ"; // site that doesn’t send Access-Control-*
+    return window.fetch(`${url}`)
       .then(response => response.json())
       .then(data => this.setState({ results: data}))
       .catch(error => console.log(error))
   }
 
   render() {
+
     console.log(this.state.results)
     return (
       <div className="ui container">
