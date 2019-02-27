@@ -8,7 +8,7 @@ class Test extends Component {
   }
 
   componentDidMount() {
-    const url = "/book/review_counts.json?isbns=0441172717%2C0141439602&key=WsrFDuZa7PUVsZH4UgdmUQ"; // site that doesn’t send Access-Control-*
+    const url = "/book/review_counts.json?isbns=0441172717%2C0141439602&key=" + process.env.REACT_APP_GOODREAD_API_KEY; // site that doesn’t send Access-Control-*
     return window.fetch(`${url}`)
       .then(response => response.json())
       .then(data => this.setState({ results: data}))
