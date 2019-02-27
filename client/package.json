@@ -18,7 +18,8 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
-    "validator": "^10.11.0"
+    "validator": "^10.11.0",
+    "xml2js": "^0.4.19"
   },
   "scripts": {
     "start": "react-scripts start",
