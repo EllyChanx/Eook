@@ -70,5 +70,4 @@ export default Test;
 
 continue to this:
 https://stackoverflow.com/questions/48632871/semantic-ui-react-making-a-segment-the-same-height
-https://www.goodreads.com/search/index.xml?key=WsrFDuZa7PUVsZH4UgdmUQ&q=Ender%27s+Game
 https://www.goodreads.com/api/index#search.books
