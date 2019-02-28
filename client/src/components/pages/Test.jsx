@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { parseString } from "xml2js";
+import { Container, Card, Icon, Image} from 'semantic-ui-react';
 
 class Test extends Component {
 
@@ -21,7 +22,7 @@ class Test extends Component {
                 goodreadsId: work.best_book[0].id[0]._,
                 title: work.best_book[0].title[0],
                 author: work.best_book[0].author[0].name[0],
-                covers: [work.best_book[0].image_url[0]]
+                covers: work.best_book[0].image_url[0]
               })
             );
             self.setState({ results: data});
@@ -46,19 +47,16 @@ class Test extends Component {
               ?
               results.map(book => {
                 return (
-                  <figure key={book.goodreadsId}>
-                    <img src={book.covers} alt='book'/>
-                    <div className="ribbon">
-                   <span>
-                    <div>{book.title}</div>
-                    <div>Authur: {book.author}</div>
-                  </span>
-                    </div>
-                    <figcaption>
-                      <div className="book-status"></div>
-                      <div>GoodRead Rating: {book.goodreadrating}</div>
-                    </figcaption>
-                  </figure>)
+                  <Card key={book.goodreadsId} > 
+                    <Image src={book.covers} alt='book' size="small"/>
+                    <Card.Content>
+                      <Card.Header>{book.title}</Card.Header>
+                      <Card.Meta>
+                        <span>Authur: {book.author}</span>
+                      </Card.Meta>
+                      <Card.Description>GoodRead Rating: {book.goodreadrating}</Card.Description>
+                    </Card.Content>
+                  </Card>)
               })
               : <Container textAlign='center'>No Books found.</Container>
             }
@@ -68,3 +66,9 @@ class Test extends Component {
 }
 
 export default Test;
+
+
+continue to this:
+https://stackoverflow.com/questions/48632871/semantic-ui-react-making-a-segment-the-same-height
+https://www.goodreads.com/search/index.xml?key=WsrFDuZa7PUVsZH4UgdmUQ&q=Ender%27s+Game
+https://www.goodreads.com/api/index#search.books
