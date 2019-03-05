@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { parseString } from "xml2js";
-import { Container, Card, Icon, Image} from 'semantic-ui-react';
+import { Container, Card, Image} from 'semantic-ui-react';
+import SearchBookForm from "../forms/SearchBookForm";
+import axios from "axios";
 
 class Test extends Component {
 
@@ -11,22 +13,23 @@ class Test extends Component {
 
   componentDidMount() {
     let self = this;
-    fetch('/search/index.xml?key='+ process.env.REACT_APP_GOODREAD_API_KEY +'&q=Ender%27s+Game')
+    fetch('/search/index.xml?key='+ process.env.REACT_APP_GOODREAD_API_KEY 
+      +'&q=Ender%27s+Game')
       .then((response) => response.text())
-        .then((responseText) => {
-          parseString(responseText, function (err, result) {
-            var data = result.GoodreadsResponse.search[0].results[0].work.map(
-              work => ({
-                goodreadrating: work.average_rating[0],
-                publicationyear: work.original_publication_year[0]._,
-                goodreadsId: work.best_book[0].id[0]._,
-                title: work.best_book[0].title[0],
-                author: work.best_book[0].author[0].name[0],
-                covers: work.best_book[0].image_url[0]
-              })
-            );
-            self.setState({ results: data});
-          });
+      .then((responseText) => {
+        parseString(responseText, function (err, result) {
+          const data = result.GoodreadsResponse.search[0].results[0].work.map(
+            work => ({
+              goodreadrating: work.average_rating[0],
+              publicationyear: work.original_publication_year[0]._,
+              goodreadsId: work.best_book[0].id[0]._,
+              title: work.best_book[0].title[0],
+              author: work.best_book[0].author[0].name[0],
+              covers: work.best_book[0].image_url[0]
+            })
+          );
+          self.setState({ results: data});
+        });
         })
         .catch((err) => {
             console.log('Error fetching the feed: ', err)
@@ -40,15 +43,17 @@ class Test extends Component {
   }
 
   render() {
+    console.log(this.state.results)
     const results = this.state.results;
         return (
           <div>
+          <SearchBookForm />
             {results.length
               ?
               results.map(book => {
                 return (
                   <Card key={book.goodreadsId} > 
-                    <Image src={book.covers} alt='book' size="small"/>
+                    <Image src={book.covers} alt='book' centered/>
                     <Card.Content>
                       <Card.Header>{book.title}</Card.Header>
                       <Card.Meta>
@@ -68,6 +73,6 @@ class Test extends Component {
 export default Test;
 
 
-continue to this:
-https://stackoverflow.com/questions/48632871/semantic-ui-react-making-a-segment-the-same-height
-https://www.goodreads.com/api/index#search.books
+// continue to this:
+// https://stackoverflow.com/questions/48632871/semantic-ui-react-making-a-segment-the-same-height
+// https://www.goodreads.com/api/index#search.books
