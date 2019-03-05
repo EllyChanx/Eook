@@ -5,6 +5,8 @@ import createBrowserHistory from "history/createBrowserHistory";
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
 
+import TopNavigation from "./components/navigation/TopNavigation";
+
 import Test from "./components/pages/Test";
 import Post from "./components/Post";
 
@@ -12,6 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className="ui container">
+        <TopNavigation />
         <Router history={createBrowserHistory()}>
           <Switch>
             <Route exact path="/" component={HomePage}/>
