@@ -10,12 +10,13 @@ class SearchBookForm extends React.Component {
     this.state = {
       query: null,
       loading: false,
-      options: [],
+      options: []
     };
+    this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
+  handleSearchChange(event) {
     this.setState({
       query: event.target.value
     }, () => {
@@ -27,7 +28,8 @@ class SearchBookForm extends React.Component {
 
   fetchQuery() {
     let self = this;
-    fetch('/search/index.xml?key='+ process.env.REACT_APP_GOODREAD_API_KEY 
+    fetch('/search/index.xml?key='
+      + process.env.REACT_APP_GOODREAD_API_KEY 
       + '&q=' + self.state.query )
       .then((response) => response.text())
       .then((responseText) => {
@@ -35,7 +37,9 @@ class SearchBookForm extends React.Component {
           const data = result.GoodreadsResponse.search[0].results[0].work.map(
             work => ({
               key: work.best_book[0].id[0]._,
-              text: work.best_book[0].title[0]
+              image: work.best_book[0].image_url[0],
+              text: work.best_book[0].title[0],
+              value: work.best_book[0].id[0]._
             })
           );
           self.setState({ options: data});
@@ -46,23 +50,29 @@ class SearchBookForm extends React.Component {
     })
   }
 
-
+  handleChange(event, data) {
+    this.setState({ query: data.value });
+    var bookSelect = data.value
+    this.props.onBookSelect(bookSelect)
+  }
 
   render() {
-    const { query, results } = this.state
+    const { query, loading } = this.state
     return (
       <div>
-        <strong>onChange:</strong>
-        <pre>{JSON.stringify({ query, results }, null, 2)}</pre>
+        <strong>onSearchChange:</strong>
+        <pre>{JSON.stringify({ query, loading }, null, 2)}</pre>
       
         <Form>
           <Dropdown
-            search
             fluid
+            search
             selection
             placeholder="Search for a book by title"
+            loading={this.state.loading}
             options={this.state.options}
-            onSearchChange={ this.handleChange }
+            onSearchChange={ this.handleSearchChange }
+            onChange={ this.handleChange }
           />
         </Form>
       </div>
