@@ -4,6 +4,7 @@ import createBrowserHistory from "history/createBrowserHistory";
 
 import HomePage from "./components/pages/HomePage";
 import LoginPage from "./components/pages/LoginPage";
+import NewBook from "./components/pages/NewBook";
 
 import TopNavigation from "./components/navigation/TopNavigation";
 
@@ -21,6 +22,7 @@ class App extends Component {
             <Route exact path="/login" component={LoginPage}/>
             <Route exact path="/test" component={Test}/>
             <Route exact path="/post" component={Post}/>
+            <Route exact path="/newbook" component={NewBook}/>
           </Switch>
         </Router>
       </div>

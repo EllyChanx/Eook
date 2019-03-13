@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { parseString } from "xml2js";
 import { Form, Dropdown } from "semantic-ui-react";
 
@@ -57,12 +57,8 @@ class SearchBookForm extends React.Component {
   }
 
   render() {
-    const { query, loading } = this.state
     return (
       <div>
-        <strong>onSearchChange:</strong>
-        <pre>{JSON.stringify({ query, loading }, null, 2)}</pre>
-      
         <Form>
           <Dropdown
             fluid
