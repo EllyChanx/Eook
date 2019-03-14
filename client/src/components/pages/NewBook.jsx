@@ -1,5 +1,6 @@
 import React from 'react';
 import { parseString } from "xml2js";
+import Iframe from 'react-iframe';
 import SearchBookForm from "../forms/SearchBookForm";
 
 class NewBook extends React.Component {
@@ -44,7 +45,8 @@ class NewBook extends React.Component {
           image: fetchData.image_url[0],
           publication_year: fetchData.publication_year[0],
           publication_month: fetchData.publication_month[0],
-          similar_books: fetchData.similar_books[0]
+          similar_books: fetchData.similar_books[0]? fetchData.similar_books[0] : null,
+          reviews_widget: fetchData.reviews_widget[0]
         }
         self.setState( { book: book });
         console.log(book)
@@ -53,9 +55,21 @@ class NewBook extends React.Component {
   }
 
   render() {
+    let reviewsWidget;
+    let embedUrl = 'https://www.goodreads.com/api/reviews_widget_iframe?isbn='
+
+    if (this.state.book) {
+      reviewsWidget = <Iframe url={ embedUrl + this.state.book.isbn }/>
+    } else {
+      reviewsWidget = <Iframe />
+    }
+
     return (
       <div>
         <SearchBookForm  onBookSelect={this.onBookSelect} />
+
+        {reviewsWidget}
+
       </div>
     )
   }
