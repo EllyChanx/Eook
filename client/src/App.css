@@ -1,7 +1,7 @@
  body {
-  background: url('./public/books_1.jpg') !important;
+  background: url('./public/books_1.jpg') no-repeat !important;
   background-color: rgba(0,0,0, 0.4);
-  background-size: auto; 
+  background-size: 100% 100%;
 } 
 
 .container {
@@ -20,6 +20,13 @@
   /*transform: translate(-50%, -50%);*/
   z-index: 2;
   width: 90%;
+  height: 90%;
   padding: 20px;
   text-align: center;
+}
+
+#search_bar {
+  /*background-color: rgba(0,0,0,0);*/
+  height: 5vh;
+  font-size: 20px;
 }

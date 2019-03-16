@@ -31,7 +31,7 @@ class SearchBookForm extends React.Component {
     fetch('/search/index.xml?key='
       + process.env.REACT_APP_GOODREAD_API_KEY 
       + '&q=' + self.state.query )
-      .then((response) => response.text())
+      .then((response) => {console.log(response);return response.text()})
       .then((responseText) => {
         parseString(responseText, function (err, result) {
           const data = result.GoodreadsResponse.search[0].results[0].work.map(
@@ -69,6 +69,7 @@ class SearchBookForm extends React.Component {
             options={this.state.options}
             onSearchChange={ this.handleSearchChange }
             onChange={ this.handleChange }
+            id="search_bar"
           />
         </Form>
       </div>
