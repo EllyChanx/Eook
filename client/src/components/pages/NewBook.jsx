@@ -5,11 +5,6 @@ import SearchBookForm from "../forms/SearchBookForm";
 
 class NewBook extends React.Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {  };
-  // }
-
   state = {
     goodreads_id: null,
     book: null
@@ -17,14 +12,19 @@ class NewBook extends React.Component {
 
   onBookSelect = (book) => {
     this.setState({ goodreads_id: book }, () =>{
-      this.fetchBookId(this.state.goodreads_id)
+      this.fetchBookInfo(this.state.goodreads_id);
     })
   }
 
-  fetchBookId = (id) => {
+  getBookCover = (id) => {
+    let openlibCover = 'http://covers.openlibrary.org/b/isbn/' + id + '-L.jpg'
+    this.setState( { openlibCover: openlibCover } )
+  }
+
+  fetchBookInfo = (id) => {
     let self = this;
     fetch('/book/show/'
-      + this.state.goodreads_id
+      + id
       + '.json?key='
       + process.env.REACT_APP_GOODREAD_API_KEY)
     .then((response) => response.text())
@@ -49,26 +49,19 @@ class NewBook extends React.Component {
           reviews_widget: fetchData.reviews_widget[0]
         }
         self.setState( { book: book });
-        console.log(book)
       })
+      self.getBookCover(this.state.book.isbn)
     })
   }
 
   render() {
-    let reviewsWidget;
-    let embedUrl = 'https://www.goodreads.com/api/reviews_widget_iframe?isbn='
-
-    if (this.state.book) {
-      reviewsWidget = <Iframe url={ embedUrl + this.state.book.isbn }/>
-    } else {
-      reviewsWidget = <Iframe />
-    }
-
+    
+    console.log(this.state)
     return (
       <div>
         <SearchBookForm  onBookSelect={this.onBookSelect} />
 
-        {reviewsWidget}
+
 
       </div>
     )
