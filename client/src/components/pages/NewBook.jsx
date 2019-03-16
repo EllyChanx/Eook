@@ -2,6 +2,7 @@ import React from 'react';
 import { parseString } from "xml2js";
 import Iframe from 'react-iframe';
 import SearchBookForm from "../forms/SearchBookForm";
+import SingleBookView from "../views/SingleBookView";
 
 class NewBook extends React.Component {
 
@@ -55,12 +56,12 @@ class NewBook extends React.Component {
   }
 
   render() {
-    
+
     console.log(this.state)
     return (
       <div>
         <SearchBookForm  onBookSelect={this.onBookSelect} />
-
+        <SingleBookView />
 
 
       </div>
