@@ -8,7 +8,8 @@ class NewBook extends React.Component {
 
   state = {
     goodreads_id: null,
-    book: null
+    book: null,
+    openlibCover: null
   };
 
   onBookSelect = (book) => {
@@ -31,7 +32,7 @@ class NewBook extends React.Component {
     .then((response) => response.text())
     .then((responseText) => {
       parseString(responseText, function (err, result) {
-        console.log(result.GoodreadsResponse.book[0]);
+        // console.log(result.GoodreadsResponse.book[0]);
         const fetchData = result.GoodreadsResponse.book[0]
         const book = {
           title: fetchData.title[0],
@@ -47,22 +48,21 @@ class NewBook extends React.Component {
           publication_year: fetchData.publication_year[0],
           publication_month: fetchData.publication_month[0],
           similar_books: fetchData.similar_books[0]? fetchData.similar_books[0] : null,
-          reviews_widget: fetchData.reviews_widget[0]
+          // reviews_widget: fetchData.reviews_widget[0]
         }
         self.setState( { book: book });
       })
-      self.getBookCover(this.state.book.isbn)
+      // self.getBookCover(this.state.book.isbn)
     })
   }
 
   render() {
-
-    console.log(this.state)
+    const { book } = this.state
     return (
       <div>
-        <SearchBookForm  onBookSelect={this.onBookSelect} />
-        <SingleBookView />
 
+        <SearchBookForm onBookSelect={this.onBookSelect} />
+        <SingleBookView bookInfo={ book } />
 
       </div>
     )
