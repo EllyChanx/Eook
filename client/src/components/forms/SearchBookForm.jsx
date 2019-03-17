@@ -31,7 +31,8 @@ class SearchBookForm extends React.Component {
     fetch('/search/index.xml?key='
       + process.env.REACT_APP_GOODREAD_API_KEY 
       + '&q=' + self.state.query )
-      .then((response) => {console.log(response);return response.text()})
+      // .then((response) => {console.log(response);return response.text()})
+      .then((response) => response.text())
       .then((responseText) => {
         parseString(responseText, function (err, result) {
           const data = result.GoodreadsResponse.search[0].results[0].work.map(

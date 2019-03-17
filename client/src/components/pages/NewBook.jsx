@@ -19,7 +19,7 @@ class NewBook extends React.Component {
   }
 
   getBookCover = (id) => {
-    let openlibCover = 'http://covers.openlibrary.org/b/isbn/' + id + '-L.jpg'
+    let openlibCover = 'http://covers.openlibrary.org/b/isbn/' + id + '-L.jpg?default=false'
     this.setState( { openlibCover: openlibCover } )
   }
 
