@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { parseString } from "xml2js";
 import { Container, Card, Image} from 'semantic-ui-react';
 import SearchBookForm from "../forms/SearchBookForm";
-import axios from "axios";
 
 class Test extends Component {
 

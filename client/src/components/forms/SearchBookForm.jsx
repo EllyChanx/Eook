@@ -1,5 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import { parseString } from "xml2js";
 import { Form, Dropdown } from "semantic-ui-react";
 
 class SearchBookForm extends React.Component {
@@ -7,46 +8,70 @@ class SearchBookForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      query:'',
+      query: null,
       loading: false,
-      options: [
-      // {
-      //   key: 1,
-      //   value: 1,
-      //   text: "first book"
-      // }, {
-      //   key: 2,
-      //   value: 2,
-      //   text: "second book"
-      // }
-      ],
+      options: []
     };
+    this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({query: event.target.value});
+  handleSearchChange(event) {
+    this.setState({
+      query: event.target.value
+    }, () => {
+      this.fetchQuery();
+      console.log(this.state.query);
+    });
+    // nest in setState to make sure fetch happen later
+  }
+
+  fetchQuery() {
+    let self = this;
+    fetch('/search/index.xml?key='
+      + process.env.REACT_APP_GOODREAD_API_KEY 
+      + '&q=' + self.state.query )
+      .then((response) => {console.log(response);return response.text()})
+      .then((responseText) => {
+        parseString(responseText, function (err, result) {
+          const data = result.GoodreadsResponse.search[0].results[0].work.map(
+            work => ({
+              key: work.best_book[0].id[0]._,
+              image: work.best_book[0].image_url[0],
+              text: work.best_book[0].title[0],
+              value: work.best_book[0].id[0]._
+            })
+          );
+          self.setState({ options: data});
+        });
+        })
+        .catch((err) => {
+            console.log('Error fetching the feed: ', err)
+    })
+  }
+
+  handleChange(event, data) {
+    this.setState({ query: data.value });
+    var bookSelect = data.value
+    this.props.onBookSelect(bookSelect)
   }
 
   render() {
-    const { query, loading } = this.state
     return (
       <div>
-        <strong>onChange:</strong>
-        {query}
-        <pre>{JSON.stringify({ query, loading }, null, 2)}</pre>
-      
         <Form>
           <Dropdown
-            search
             fluid
+            search
             selection
             placeholder="Search for a book by title"
+            loading={this.state.loading}
             options={this.state.options}
-            onSearchChange={ this.handleChange }
+            onSearchChange={ this.handleSearchChange }
+            onChange={ this.handleChange }
+            id="search_bar"
           />
         </Form>
-         <input type="text" value={this.state.query} onChange={this.handleChange} />
       </div>
     );
   }
