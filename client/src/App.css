@@ -1,4 +1,6 @@
- body {
+@import url('https://fonts.googleapis.com/css?family=Lobster|Mukta|Pacifico|Satisfy|Srisakdi|ZCOOL+XiaoWei');
+
+body {
   background: url('./public/books_1.jpg') no-repeat !important;
   background-color: rgba(0,0,0, 0.4);
   background-size: 100% 100%;
@@ -29,4 +31,23 @@
   /*background-color: rgba(0,0,0,0);*/
   height: 5vh;
   font-size: 20px;
+}
+
+#singlebook-grid-left.column {
+  background-color: rgba(0,0,0,0);
+  width: 35%;
+}
+
+#singlebook-grid-right.column {
+  /*background: url('./public/paper_2.jpg') ;*/
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
+  opacity: .8; 
+  box-shadow: 0 0 59px 25px rgba(100,100,100,0.6) inset;
+  width: 65%;
+}
+
+#singlebook-bkcover {
+  max-width: 200px;
 }

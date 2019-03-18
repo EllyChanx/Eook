@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Container, Card, Icon, Image, Divider, Grid } from 'semantic-ui-react'
+// import PropTypes from 'prop-types';
 
 class SingleBookView extends React.Component {
 
@@ -8,43 +9,51 @@ class SingleBookView extends React.Component {
     bookAuthors = book.authors.map(
       author => (author.name + "\n")
     )
-    return { bookAuthors }
+    return bookAuthors
   }
 
   processImage = (book, openlibCover) => {
     let bookImage;
     book.isbn.length > 0 ? bookImage = openlibCover : bookImage = book.image;
-    return { bookImage }
+    return bookImage 
   }
 
   render() {
 
     let book = this.props.bookInfo;
     let openlibCover = this.props.bookCover
-    let bookCard;
-    let test;
-
-    if ( book && openlibCover ) {
-      console.log(book);
-      const { bookAuthors } = this.processAuthors(book)
-      const { bookImage } = this.processImage(book, openlibCover)
-      bookCard = <Card  image={bookImage} 
-                        onError={i => i.target.src='/images/missingBook.jpg'}
-                        // onError={i => i.target.src='https://image.freepik.com/free-vector/design-404-error-page-is-lost-found-message-template-web-page-with-404-error-modern-line-design_6280-165.jpg'}
-                        meta={bookAuthors}
-                        />
-
-     
-    } else {
-      bookCard = null;
-
-    }
+  
+    console.log(book);
 
     return (
       <div>
         
         <p> SingleBookView </p>
-        { bookCard }
+          <Container>
+          <Grid container stackable columns={2} relaxed='very'>
+            <Grid.Column id='singlebook-grid-left' floated='left'>
+              <Image  src={ this.processImage(book, openlibCover) }
+                      onError={ i => i.target.src='/images/missingBook.jpg' }
+                      rounded id='singlebook-bkcover'/>
+              <p> { this.processAuthors(book) } </p>
+              
+            </Grid.Column>
+
+            
+
+            <Grid.Column id='singlebook-grid-right' floated='left'>
+              <p> info </p>
+            </Grid.Column>
+          </Grid>
+
+          <Divider vertical fitted >
+              <Icon name='book' color='grey'/>
+          </Divider>
+
+
+          </Container>
+
+
       </div>
     )
   }

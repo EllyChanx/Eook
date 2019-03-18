@@ -57,13 +57,21 @@ class NewBook extends React.Component {
     })
   }
 
+  renderSingleBookView () {
+    let { book, openlibCover } = this.state
+    let singleBookView;
+    if (this.state.book) {
+      singleBookView = <SingleBookView bookInfo={ book } bookCover={ openlibCover }/>
+    }
+    return singleBookView;
+  }
+
   render() {
-    const { book, openlibCover } = this.state
     return (
       <div>
 
         <SearchBookForm onBookSelect={this.onBookSelect} />
-        <SingleBookView bookInfo={ book } bookCover={ openlibCover } />
+        {this.renderSingleBookView()}
 
       </div>
     )
