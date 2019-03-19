@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Icon, Image, Divider, Grid, Header } from 'semantic-ui-react'
+import { Container, Icon, Image, Divider, Grid, Header, Rating, Popup } from 'semantic-ui-react'
 // import PropTypes from 'prop-types';
 
 class SingleBookView extends React.Component {
@@ -20,7 +20,13 @@ class SingleBookView extends React.Component {
 
   processDescription = (book) => {
     let bookDescription = book.description.replace(/<br\s*\/?>/ig, "\r\n"); 
-    return bookDescription.replace(/<\s*\/?i\s*\/?>/g, "")
+    // return bookDescription.replace(/<\s*\/?i\s*\/?>/g, "")
+    // bookDescription = book.description.replace(/<.*?>/gm, '');
+    return bookDescription.replace(/<.*?>/gm, '');
+  }
+
+  processRating = (book) => {
+    return book.goodreads_raiting;
   }
 
   render() {
@@ -34,14 +40,21 @@ class SingleBookView extends React.Component {
       <div>
         
         <p> SingleBookView </p>
-          <Container>
-          <Grid columns={2} textAlign='center' stackable divided>
+          <Container id='singlebook-view-container'>
+          <Grid columns={2} centered stackable divided>
 
-            <Grid.Column id='singlebook-grid-left' width={6}>
+            <Grid.Column id='singlebook-grid-left' width={6} >
               <Image  src={ this.processImage(book, openlibCover) }
-                      onError={ i => i.target.src='/images/missingBook.jpg' }
+                      onError={ i => {i.target.src='/images/missingBook.jpg'} }
                       rounded centered id='singlebook-bkcover'/>
-              <p> { this.processAuthors(book) } </p>
+              <p id='singlebook-author'> { this.processAuthors(book) } </p>
+              <div id='singlebook-rating'>
+
+                <Popup  trigger={(<Rating icon='star' rating={book.goodreads_raiting} maxRating={5} disabled />)}
+                        content='Rating from Goodreads' inverted style={{opacity: 0.9}}/> 
+                <Popup  trigger={<span> {book.goodreads_raiting} </span>}
+                        content='Rating from Goodreads' inverted style={{opacity: 0.9}}/>
+              </div>
               
             </Grid.Column>
 
