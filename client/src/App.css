@@ -25,6 +25,7 @@ body {
   height: 90%;
   padding: 20px;
   text-align: center;
+  overflow-y: scroll;
 }
 
 #search_bar {
@@ -35,7 +36,7 @@ body {
 
 #singlebook-grid-left.column {
   background-color: rgba(0,0,0,0);
-  width: 35%;
+  /*width: 35%;*/
 }
 
 #singlebook-grid-right.column {
@@ -44,10 +45,20 @@ body {
   background-repeat:   no-repeat;
   background-position: center center;
   opacity: .8; 
-  box-shadow: 0 0 59px 25px rgba(100,100,100,0.6) inset;
-  width: 65%;
+  padding: 20px;
+  box-shadow: 0 0 100px 25px rgba(0,0,0,0.8) inset;
+  /*width: 65%;*/
 }
 
 #singlebook-bkcover {
-  max-width: 200px;
+  width: 200px;
+}
+
+#singlebook-title {
+  color: white;
+  font-family: 'ZCOOL XiaoWei';
+}
+
+#singlebook-discription {
+  font-family: 'ZCOOL XiaoWei';
 }

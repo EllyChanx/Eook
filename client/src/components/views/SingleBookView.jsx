@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Card, Icon, Image, Divider, Grid } from 'semantic-ui-react'
+import { Container, Icon, Image, Divider, Grid, Header } from 'semantic-ui-react'
 // import PropTypes from 'prop-types';
 
 class SingleBookView extends React.Component {
@@ -18,6 +18,11 @@ class SingleBookView extends React.Component {
     return bookImage 
   }
 
+  processDescription = (book) => {
+    let bookDescription = book.description.replace(/<br\s*\/?>/ig, "\r\n"); 
+    return bookDescription.replace(/<\s*\/?i\s*\/?>/g, "")
+  }
+
   render() {
 
     let book = this.props.bookInfo;
@@ -30,25 +35,22 @@ class SingleBookView extends React.Component {
         
         <p> SingleBookView </p>
           <Container>
-          <Grid container stackable columns={2} relaxed='very'>
-            <Grid.Column id='singlebook-grid-left' floated='left'>
+          <Grid columns={2} textAlign='center' stackable divided>
+
+            <Grid.Column id='singlebook-grid-left' width={6}>
               <Image  src={ this.processImage(book, openlibCover) }
                       onError={ i => i.target.src='/images/missingBook.jpg' }
-                      rounded id='singlebook-bkcover'/>
+                      rounded centered id='singlebook-bkcover'/>
               <p> { this.processAuthors(book) } </p>
               
             </Grid.Column>
 
-            
-
-            <Grid.Column id='singlebook-grid-right' floated='left'>
-              <p> info </p>
+            <Grid.Column id='singlebook-grid-right' width={10}>
+              <Header as='h2' id='singlebook-title'>{ book.title }</Header>
+              <p id='singlebook-discription'> { this.processDescription(book) } </p>
             </Grid.Column>
           </Grid>
 
-          <Divider vertical fitted >
-              <Icon name='book' color='grey'/>
-          </Divider>
 
 
           </Container>
