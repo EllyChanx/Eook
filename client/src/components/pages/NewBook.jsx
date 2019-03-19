@@ -19,7 +19,7 @@ class NewBook extends React.Component {
   }
 
   getBookCover = (id) => {
-    let openlibCover = 'http://covers.openlibrary.org/b/isbn/' + id + '-L.jpg'
+    let openlibCover = 'http://covers.openlibrary.org/b/isbn/' + id + '-L.jpg?default=false'
     this.setState( { openlibCover: openlibCover } )
   }
 
@@ -57,13 +57,21 @@ class NewBook extends React.Component {
     })
   }
 
+  renderSingleBookView () {
+    let { book, openlibCover } = this.state
+    let singleBookView;
+    if (this.state.book) {
+      singleBookView = <SingleBookView bookInfo={ book } bookCover={ openlibCover }/>
+    }
+    return singleBookView;
+  }
+
   render() {
-    const { book, openlibCover } = this.state
     return (
       <div>
 
         <SearchBookForm onBookSelect={this.onBookSelect} />
-        <SingleBookView bookInfo={ book } bookCover={ openlibCover } />
+        {this.renderSingleBookView()}
 
       </div>
     )
