@@ -21,7 +21,7 @@ body {
   margin: auto;
   /*transform: translate(-50%, -50%);*/
   z-index: 2;
-  width: 90%;
+  width: 80%;
   height: 90%;
   padding: 20px;
   text-align: center;
@@ -30,8 +30,7 @@ body {
 
 #search_bar {
   /*background-color: rgba(0,0,0,0);*/
-  height: 5vh;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 #singlebook-grid-left.column {
@@ -52,13 +51,26 @@ body {
 
 #singlebook-bkcover {
   width: 200px;
+  margin: 20px auto 0 auto;
 }
 
 #singlebook-title {
+  margin-top: 15px;
   color: white;
   font-family: 'ZCOOL XiaoWei';
 }
 
 #singlebook-discription {
   font-family: 'ZCOOL XiaoWei';
+}
+
+#singlebook-author {
+  font-family: 'Satisfy';
+  text-align: center;
+  margin: 15px auto 0px auto;
+}
+
+#singlebook-rating {
+  text-align: center;
+  margin: 15px auto 0px auto;
 }

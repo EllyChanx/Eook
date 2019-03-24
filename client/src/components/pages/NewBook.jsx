@@ -37,7 +37,7 @@ class NewBook extends React.Component {
         const book = {
           title: fetchData.title[0],
           authors: fetchData.authors[0].author,
-          goodreads_raiting: fetchData.average_rating,
+          goodreads_raiting: fetchData.average_rating[0],
           goodreads_link: fetchData.book_links[0],
           description: fetchData.description[0],
           goodreads_id: fetchData.id[0],
