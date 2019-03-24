@@ -69,7 +69,6 @@ class NewBook extends React.Component {
   render() {
     return (
       <div>
-
         <SearchBookForm onBookSelect={this.onBookSelect} />
         {this.renderSingleBookView()}
 

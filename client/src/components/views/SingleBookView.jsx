@@ -42,10 +42,9 @@ class SingleBookView extends React.Component {
 
     return (
       <div>
-        
-        <p> SingleBookView </p>
+
           <Container id='singlebook-view-container'>
-          <Grid columns={2} centered stackable divided>
+          <Grid columns={2} centered stackable divided id='singlebook-grid'>
 
             <Grid.Column id='singlebook-grid-left' width={6} >
               <Image  src={ this.processImage(book, openlibCover) }
