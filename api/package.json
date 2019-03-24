@@ -1,18 +1,29 @@
 {
-  "name": "example-create-react-app-express",
+  "name": "eook-api",
   "version": "1.0.0",
+  "main": "dist/index.js",
   "scripts": {
-    "client": "cd client && yarn start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "node-fetch": "^2.3.0",
+    "pg": "^7.9.0",
+    "pg-promise": "^8.6.4",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.1",
+    "@types/node": "^11.11.6",
+    "@types/pg": "^7.4.14",
+    "concurrently": "^4.0.1",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
   }
 }
