@@ -1,8 +1,8 @@
 import React from 'react';
 import { parseString } from "xml2js";
-import Iframe from 'react-iframe';
+// import Iframe from 'react-iframe';
 import SearchBookForm from "../forms/SearchBookForm";
-import SingleBookView from "../views/SingleBookView";
+import SingleBookMenu from "../menu/SingleBookMenu";
 
 class NewBook extends React.Component {
 
@@ -57,20 +57,20 @@ class NewBook extends React.Component {
     })
   }
 
-  renderSingleBookView () {
+  renderSingleBookMenu () {
     let { book, openlibCover } = this.state
-    let singleBookView;
+    let singleBookMenu;
     if (this.state.book) {
-      singleBookView = <SingleBookView bookInfo={ book } bookCover={ openlibCover }/>
+      singleBookMenu = <SingleBookMenu bookInfo={ book } bookCover={ openlibCover }/>
     }
-    return singleBookView;
+    return singleBookMenu;
   }
 
   render() {
     return (
       <div>
         <SearchBookForm onBookSelect={this.onBookSelect} />
-        {this.renderSingleBookView()}
+        {this.renderSingleBookMenu()}
 
       </div>
     )

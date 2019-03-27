@@ -1,12 +1,32 @@
 import React from "react";
-import { Container, Icon, Image, Divider, Grid, Header, Rating, Popup, Menu } from 'semantic-ui-react'
+import { Container, Icon, Image, Divider, Grid, Rating, Popup, Menu } from 'semantic-ui-react'
+import BookStoryView from "../views/BookStoryView";
 // import PropTypes from 'prop-types';
 
-class SingleBookView extends React.Component {
+class SingleBookMenu extends React.Component {
 
   state = { activeItem: 'Story' }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ activeItem: name });
+  }
+  // the e prevent rerender and allow the {name} to be passed (?)
+  // alternatively use arrow function when call and pass the name
+
+  renderBookRGrid = (book) => {
+    let bookRGrid;
+    switch (this.state.activeItem) {
+      case "Story":
+        bookRGrid = <BookStoryView bookTitle={ book.title } bookDescription={ book.description } />
+        break;
+      case "Comments":
+        bookRGrid = null
+        break;
+      case "Quotes":
+        bookRGrid = null
+    }
+    return bookRGrid;
+  }
 
   processAuthors = (book) => {
     let bookAuthors;
@@ -22,13 +42,6 @@ class SingleBookView extends React.Component {
     return bookImage 
   }
 
-  processDescription = (book) => {
-    let bookDescription = book.description.replace(/<br\s*\/?>/ig, "\r\n"); 
-    // return bookDescription.replace(/<\s*\/?i\s*\/?>/g, "")
-    // bookDescription = book.description.replace(/<.*?>/gm, '');
-    return bookDescription.replace(/<.*?>/gm, '');
-  }
-
   processRating = (book) => {
     return book.goodreads_raiting;
   }
@@ -37,7 +50,6 @@ class SingleBookView extends React.Component {
     const { activeItem } = this.state
     let book = this.props.bookInfo;
     let openlibCover = this.props.bookCover
-  
     console.log(book);
 
     return (
@@ -62,9 +74,12 @@ class SingleBookView extends React.Component {
             </Grid.Column>
 
             <Grid.Column id='singlebook-grid-right' width={10}>
-              
-              <Header as='h2' id='singlebook-title'>{ book.title }</Header>
-              <p id='singlebook-discription'> { this.processDescription(book) } </p>
+              <Menu tabular inverted color='black' size='large'>
+                <Menu.Item name='Story' active={activeItem === 'Story'} onClick={this.handleItemClick} icon='book'/>
+                <Menu.Item name='Comments' active={activeItem === 'Comments'} onClick={this.handleItemClick} icon='comments outline'/>
+                <Menu.Item name='Quotes' active={activeItem === 'Quotes'} onClick={this.handleItemClick} icon='quote left'/>
+              </Menu>
+              {this.renderBookRGrid(book)}
             </Grid.Column>
           </Grid>
 
@@ -78,4 +93,5 @@ class SingleBookView extends React.Component {
   }
 }
 
-export default SingleBookView;
+
+export default SingleBookMenu;

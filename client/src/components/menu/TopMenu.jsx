@@ -1,10 +1,10 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
 
-const TopNavigation = ({ }) => (
+const TopMenu = ({ }) => (
     <Menu secondary pointing>
       
     </Menu>
 )
 
-export default TopNavigation;
+export default TopMenu;
